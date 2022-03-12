@@ -4,27 +4,27 @@ CREATE DATABASE employeetracker_DB;
 USE employeetracker_DB;
 
 CREATE TABLE employee (
-    employee_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    employeeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL, 
     last_name VARCHAR(30) NOT NULL,
-    role_id INT NOT NULL,
-    manager_id INT,
-    FOREIGN KEY (role_id) REFERENCES role(role_id),
-    FOREIGN KEY (manager_id) REFERENCES department(department_id)
+    roleID INT NOT NULL,
+    managerID INT,
+    FOREIGN KEY (roleID) REFERENCES role(roleID),
+    FOREIGN KEY (managerID) REFERENCES department(departmentID)
 );
 
 CREATE TABLE role (
-    role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    roleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL, 
     salary DECIMAL,
-    department_id INT
-    FOREIGN KEY (department_id) REFERENCES department(department_id)
+    departmentID INT
+    FOREIGN KEY (departmentID) REFERENCES department(departmentID)
 );
 
 CREATE TABLE department (
-    role_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    roleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL
     salary DECIMAL,
-    department_id INT,
-    FOREIGN KEY (department_id) REFERENCES department (department_id)
+    departmentID INT,
+    FOREIGN KEY (departmentID) REFERENCES department (departmentID)
 );
