@@ -1,0 +1,27 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "app that manages employee data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KevinGodek/employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinGodek/employee-tracker.git"
+  },
+  "homepage": "https://github.com/KevinGodek/employee-tracker.git",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "console.table": "^0.10.0",
+    "figlet": "^1.3.0",
+    "inquirer": "^7.1.0",
+    "mysql": "^2.18.1"
+  }
+}
