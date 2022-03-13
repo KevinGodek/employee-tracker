@@ -1,14 +1,14 @@
-INSERT INTO employee (firstName, lastName) VALUES ("Stan","Marsh");
-INSERT INTO employee (firstName, lastName) VALUES ("Kyle","Broflovski");
-INSERT INTO employee (firstName, lastName) VALUES ("Eric","Cartman");
-INSERT INTO employee (firstName, lastName) VALUES ("Kenny","McCormick");
-INSERT INTO employee (firstName, lastName) VALUES ("Randy","Marsh");
-INSERT INTO employee (firstName, lastName) VALUES ("Will","Smith");
-INSERT INTO employee (firstName, lastName) VALUES ("Micheal","Kelso");
-INSERT INTO employee (firstName, lastName) VALUES ("Red","Foreman");
-INSERT INTO employee (firstName, lastName) VALUES ("BoJack","Horseman");
-INSERT INTO employee (firstName, lastName) VALUES ("Rick","Sanchez");
-INSERT INTO employee (firstName, lastName) VALUES ("Stephan","Curry");
+INSERT INTO employee (firstName, lastName) VALUES ("Stan","Marsh", 2);
+INSERT INTO employee (firstName, lastName) VALUES ("Kyle","Broflovski", 1);
+INSERT INTO employee (firstName, lastName) VALUES ("Eric","Cartman", 1);
+INSERT INTO employee (firstName, lastName) VALUES ("Kenny","McCormick", 3);
+INSERT INTO employee (firstName, lastName) VALUES ("Randy","Marsh", 4);
+INSERT INTO employee (firstName, lastName) VALUES ("Will","Smith", 2);
+INSERT INTO employee (firstName, lastName) VALUES ("Micheal","Kelso", 4);
+INSERT INTO employee (firstName, lastName) VALUES ("Red","Foreman", 1);
+INSERT INTO employee (firstName, lastName) VALUES ("BoJack","Horseman", 3);
+INSERT INTO employee (firstName, lastName) VALUES ("Rick","Sanchez", 2);
+INSERT INTO employee (firstName, lastName) VALUES ("Stephan","Curry", 1);
 
 INSERT INTO role(title, salary) VALUES ('Senior Engineer', 110000);
 INSERT INTO role(title, salary) VALUES ('Junior Engineer', 80000);
