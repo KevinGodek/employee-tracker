@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     port: 3306,
     user: "root",
-    password: "root",
+    password: "password",
     database: "employeetracker_DB"
 })
 
@@ -23,3 +23,39 @@ connection.query('SELECT * FROM employee', (err, result) => {
     if (err) throw err;
     console.log(result);
 })
+
+inquirer.prompt([{
+  message: 'What would you like to do?',
+  type: 'list',
+  name: 'choice',
+  choices: [
+      'View all Employees',
+      'View all Departments',
+      'View all Roles',
+      'View all Employees by Department',
+      'Add Employee',
+      'Update Employee',
+      'Remove Employee',
+      'Add Role',
+      'Update Role',
+      'Delete Role',
+      'Add Department',
+      'Update Department',
+      'Delete Department'
+  ]
+}])
+  .then((answers) => {
+      if (answers.choice === 'View all Employees') {
+          connection.query(`SELECT employee.firstName, 
+          employee.lastName,
+          role.title AS Title,
+          role.salary AS Salary,
+          department.name AS Department
+      FROM employee 
+          INNER JOIN role ON employee.role_id=role.role_id
+          INNER JOIN department ON employee.role_id=department.department_id`, (err, result) => {
+              if (err) throw err;
+              console.table(result);
+          })
+      }
+  })
