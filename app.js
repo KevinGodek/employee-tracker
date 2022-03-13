@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql');
-const consoleTable = require('console.table');
-
+// const consoleTable = require('console.table');
+// const { Hash } = require('crypto');
+const figlet = require('figlet');
+//const chalk = require('chalk');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -9,20 +11,42 @@ const connection = mysql.createConnection({
     user: "root",
     password: "password",
     database: "employeetracker_DB"
-})
+})  
+
+// const seedQuery = fs.readFileSync("db/employeeTrackerSeeds.sql", {
+//   econding: "utf-8",
+// });
+
+// connection.query(seedQuery, [hash], err => {
+//   if (err) {
+//     throw err
+//   }
+//   console.log("sql seed complete")
+//   connection.end()
+// })
 
 connection.connect((err) => {
     if (err) {
         console.error(`connection error`, err.stack);
         return
     }
-    console.log(`connected ${connection.threadId}`);
+    console.log(`connected ${connection.threadID}`);
 })
 
-connection.query('SELECT * FROM employee', (err, result) => {
-    if (err) throw err;
-    console.log(result);
-})
+// connection.query('SELECT * FROM employee', (err, result) => {
+//     if (err) throw err;
+//     console.log(result);
+// })
+
+function initalPrompt() {
+  figlet('Employee Tracker', function (err, data) {
+    if (err) {
+      console.log('error');
+      console.dir(err);
+      return;
+  }
+  //console.log(chalk.yellow(data))
+});
 
 inquirer.prompt([{
   message: 'What would you like to do?',
@@ -54,7 +78,10 @@ inquirer.prompt([{
     } else if (answers.choice === 'Add Employee') {
         addEmployee();
     }
-  });
+  })
+};
+
+initalPrompt();
 
 function viewAllEmployees() {
   connection.query(`SELECT employee.firstName, 
@@ -69,6 +96,7 @@ function viewAllEmployees() {
       if (err) throw err;
       console.table(result);
   });  
+  initalPrompt();
 };
 
 function viewAllDepartemnts() {
@@ -90,7 +118,7 @@ function viewAllDepartemnts() {
         department.name AS Department
     FROM employee
         INNER JOIN role ON employee.roleID=role.roleID     
-        INNER JOIN department ON employee.roleID=department.department_id
+        INNER JOIN department ON employee.roleID=department.departmentID
         WHERE department.name='${answers.dept}'`, (err, result) => {
             if (err) throw err;
             console.table(result);
@@ -117,7 +145,7 @@ function viewAllRoles() {
         role.title AS Title
     FROM employee
         INNER JOIN role ON employee.roleID=role.roleID     
-        INNER JOIN department ON employee.roleID=department.department_id
+        INNER JOIN department ON employee.roleID=department.departmentID
         WHERE role.title='${answers.role}'`, (err, result) => {
             if (err) throw err;
             console.table(result);
