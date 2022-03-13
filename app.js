@@ -46,16 +46,69 @@ inquirer.prompt([{
 }])
   .then((answers) => {
       if (answers.choice === 'View all Employees') {
-          connection.query(`SELECT employee.firstName, 
-          employee.lastName,
-          role.title AS Title,
-          role.salary AS Salary,
-          department.name AS Department
-      FROM employee 
-          INNER JOIN role ON employee.roleID=role.roleID
-          INNER JOIN department ON employee.roleID=department.departmentID`, (err, result) => {
-              if (err) throw err;
-              console.table(result);
-          })
+        viewAllEmployees();
       }
   })
+
+function viewAllEmployees() {
+  connection.query(`SELECT employee.firstName, 
+    employee.lastName,
+    role.title AS Title,
+    role.salary AS Salary,
+    department.name AS Department
+   FROM employee 
+    INNER JOIN role ON employee.roleID=role.roleID
+    INNER JOIN department ON 
+    employee.roleID=department.departmentID`, (err, result) => {
+      if (err) throw err;
+      console.table(result);
+  });  
+};
+
+function viewAllDepartemnts() {
+
+}
+
+function viewAllRoles() {
+
+}
+
+function viewAllEmployeesByDepartment() {
+
+}
+
+function addEmployee() {
+
+}
+
+function updateEmployee() {
+
+}
+
+function removeEmployee() {
+
+}
+
+function addRole() {
+
+}
+
+function updateRole() {
+
+}
+
+function deleteRole() {
+
+}
+
+function addDept() {
+
+}
+
+function updateDept() {
+
+}
+
+function deleteDept() {
+
+}
