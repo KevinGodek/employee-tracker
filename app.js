@@ -130,17 +130,18 @@ function viewAllEmployeesByDepartment() {
 }
 
 function addEmployee() {
-  inquirer.prompt([
+  roles = [
+    'Senior Engineer',
+    'Junior Engineer',
+    'Sales Person',
+    'Lawyer'
+];
+inquirer.prompt([
     {
-        message: "What is the employee's role?",
+        message: "Employee's role?",
         type: 'list',
         name: 'role',
-        choices: [
-            'Seniour Engineer',
-            'Junior Engineer',
-            'Sales Person',
-            'Lawyer'
-        ]
+        choices: roles
     },
     {
         message: "Employee's first name?",
@@ -155,12 +156,18 @@ function addEmployee() {
 ])
     .then((answers) => {
         connection.query(`
-        INSERT INTO employee (first_name, last_name, roleID) VALUES ("${answers.firstName}","${answers.lastName}", '${answers.role.indexOf(role)}');`,
-            (err, result) => {
+        INSERT INTO employee SET ?`,
+                {
+                    first_name: answers.firstName,
+                    last_name: answers.lastName,
+                    role_id: roles.indexOf(answers.role) + 1 
+                },
+                (err, result) => {
                 if (err) throw err;
-                console.table(result);
-            })
-    })
+            console.table(result);
+        })
+        console.log(answers.role);
+      })
 }
 
 function updateEmployee() {
