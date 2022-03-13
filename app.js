@@ -158,9 +158,9 @@ inquirer.prompt([
         connection.query(`
         INSERT INTO employee SET ?`,
                 {
-                    first_name: answers.firstName,
-                    last_name: answers.lastName,
-                    role_id: roles.indexOf(answers.role) + 1 
+                    firstName: answers.firstName,
+                    lastName: answers.lastName,
+                    roleID: roles.indexOf(answers.role) + 1 
                 },
                 (err, result) => {
                 if (err) throw err;
