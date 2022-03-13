@@ -42,13 +42,19 @@ inquirer.prompt([{
       'Add Department',
       'Update Department',
       'Delete Department'
-  ]
+    ]
 }])
   .then((answers) => {
       if (answers.choice === 'View all Employees') {
         viewAllEmployees();
-      }
-  })
+      } else if (answers.choice === 'View All Employees by Department') {
+        viewByDept();
+    } else if (answers.choice === 'View All Employees by Role') {
+        viewByRole();
+    } else if (answers.choice === 'Add Employee') {
+        addEmployee();
+    }
+  });
 
 function viewAllEmployees() {
   connection.query(`SELECT employee.firstName, 
@@ -66,11 +72,57 @@ function viewAllEmployees() {
 };
 
 function viewAllDepartemnts() {
-
+  inquirer.prompt([{
+    message: "Which department would you like to view?",
+    type: 'list',
+    name: 'dept',
+    choices: [
+        'Engineering',
+        'Management',
+        'Sales',
+        'Legal'
+    ]
+}])
+    .then((answers) => {
+        connection.query(`SELECT 
+        employee.firstName,
+        employee.lastName,
+        department.name AS Department
+    FROM employee
+        INNER JOIN role ON employee.roleID=role.roleID     
+        INNER JOIN department ON employee.roleID=department.department_id
+        WHERE department.name='${answers.dept}'`, (err, result) => {
+            if (err) throw err;
+            console.table(result);
+        })
+    })
 }
 
 function viewAllRoles() {
-
+  inquirer.prompt([{
+    message: "Which roles would you like to view?",
+    type: 'list',
+    name: 'role',
+    choices: [
+        'Junior Developer',
+        'Senior Developer',
+        'Sales Lead',
+        'Lawyer'
+    ]
+}])
+    .then((answers) => {
+        connection.query(`SELECT 
+        employee.firstName,
+        employee.lastName,
+        role.title AS Title
+    FROM employee
+        INNER JOIN role ON employee.roleID=role.roleID     
+        INNER JOIN department ON employee.roleID=department.department_id
+        WHERE role.title='${answers.role}'`, (err, result) => {
+            if (err) throw err;
+            console.table(result);
+        })
+    })
 }
 
 function viewAllEmployeesByDepartment() {
@@ -78,7 +130,37 @@ function viewAllEmployeesByDepartment() {
 }
 
 function addEmployee() {
-
+  inquirer.prompt([
+    {
+        message: "What is the employee's role?",
+        type: 'list',
+        name: 'role',
+        choices: [
+            'Seniour Engineer',
+            'Junior Engineer',
+            'Sales Person',
+            'Lawyer'
+        ]
+    },
+    {
+        message: "Employee's first name?",
+        type: 'input',
+        name: 'firstName',
+    },
+    {
+        message: "Employee's last name?",
+        type: 'input',
+        name: 'lastName',
+    },
+])
+    .then((answers) => {
+        connection.query(`
+        INSERT INTO employee (first_name, last_name, roleID) VALUES ("${answers.firstName}","${answers.lastName}", '${answers.role.indexOf(role)}');`,
+            (err, result) => {
+                if (err) throw err;
+                console.table(result);
+            })
+    })
 }
 
 function updateEmployee() {
