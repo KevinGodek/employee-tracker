@@ -52,8 +52,8 @@ inquirer.prompt([{
           role.salary AS Salary,
           department.name AS Department
       FROM employee 
-          INNER JOIN role ON employee.role_id=role.role_id
-          INNER JOIN department ON employee.role_id=department.department_id`, (err, result) => {
+          INNER JOIN role ON employee.roleID=role.roleID
+          INNER JOIN department ON employee.roleID=department.departmentID`, (err, result) => {
               if (err) throw err;
               console.table(result);
           })
